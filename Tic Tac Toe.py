@@ -44,7 +44,7 @@ def make_ai_move():
             copy = board[:]
             copy[i] = player_symbol
             if check_win_on_board(copy, player_symbol):
-                update_cell(i, player_symbol, "red")
+                update_cell(i, ai_symbol, "blue")
                 return
             
     move = random.choice([i for i in range(9) if board[i] ==''])
@@ -57,7 +57,7 @@ def check_win_on_board(board, symbol):
     return any(board[a]==board[b]==board[c]==symbol for a, b, c, in wins)
 
 def on_click(index):
-    if board [index] == '' and not game_over():
+    if board[index] == '' and not game_over():
         update_cell(index, player_symbol, "red")
         if not game_over():
             root.after(300, make_ai_move)
@@ -68,7 +68,7 @@ def update_cell(index, symbol, color):
     if check_win(symbol):
         messagebox.showinfo("Game Over", f"{'You' if symbol == player_symbol else 'AI'} win!")
     elif is_full():
-        messagebox.showinfo("Game Over", "Its a tie!")
+        messagebox.showinfo("Game Over", "It's a tie!")
 
 def game_over():
     return check_win(player_symbol) or check_win(ai_symbol) or is_full()
